@@ -20,6 +20,7 @@ const Login = () => {
             const userData = await loginUser(formData);
             login(userData);
             alert("Login successful");
+            navigate('/dashboard')
         } catch (err) {
             console.error(err);
             alert("Login failed");

@@ -1,0 +1,19 @@
+.add__product__button {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.add__product__button button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add__product__button button:hover {
+  background-color: #0056b3;
+}

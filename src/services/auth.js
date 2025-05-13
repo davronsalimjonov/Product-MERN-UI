@@ -8,16 +8,25 @@ export const registerUser = async (userData) => {
 };
 
 export const loginUser = async (userData) => {
-  const response = await axios.post(`${API_URL}/login`, userData);
-  const { token } = response.data;
+  try {
+    localStorage.removeItem("accessToken");
+    const response = await axios.post(`${API_URL}/login`, userData);
 
-  if (token) {
-    localStorage.setItem("authToken", token);
+    console.log("Login response data:", response.data);
+
+    const { token } = response.data;
+
+    if (token) {
+      localStorage.setItem("accessToken", token);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.log("Login error:", error);
+    throw error;
   }
-
-  return response.data;
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem("authToken");
+  localStorage.removeItem("accessToken");
 };

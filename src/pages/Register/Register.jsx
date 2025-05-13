@@ -17,6 +17,7 @@ const Register = () => {
     try {
       await registerUser(formData);
       alert("Registration successful");
+      navigate('/login')
     } catch (err) {
       console.error(err);
       alert(err.response.data.message || "Registration failed");

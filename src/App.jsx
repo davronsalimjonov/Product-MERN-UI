@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import { AuthProvider, useAuth } from "./context/authContext";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -10,6 +11,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+
   return (
     <AuthProvider>
       <Router>
@@ -20,7 +22,7 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                {/* <Dashboard /> */}
+                <Dashboard />
               </ProtectedRoute>
             }
           />
