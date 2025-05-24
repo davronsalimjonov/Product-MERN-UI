@@ -9,16 +9,16 @@ export const registerUser = async (userData) => {
 
 export const loginUser = async (userData) => {
   try {
-    localStorage.removeItem("accessToken");
     const response = await axios.post(`${API_URL}/login`, userData);
 
-    console.log("Login response data:", response.data);
 
-    const { token } = response.data;
+    const token = response.data.accessToken;
 
     if (token) {
       localStorage.setItem("accessToken", token);
     }
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     return response.data;
   } catch (error) {

@@ -5,7 +5,13 @@ import { AuthProvider, useAuth } from "./context/authContext";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  console.log(user, loading);
+
+  if (loading) {
+    
+    return <div>Loading...</div>; // or a spinner
+  }
 
   return user ? children : <Navigate to="/login" />;
 };
@@ -16,6 +22,10 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          <Route
+            path="/"
+            element={<Login />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route

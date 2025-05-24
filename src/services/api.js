@@ -9,18 +9,24 @@ const api = axios.create({
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("accessToken");
-        console.log("Token being sent in request:", token);
 
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Authorization = `${token}`;
         }
+
+        config.headers = {
+            ...config.headers,
+            Authorization: token ? `${token.replace(/"/g, '')}` : undefined,
+            "Content-Type": config.headers["Content-Type"] || "application/json",
+        };
 
         return config;
     },
     (error) => {
-        console.log("Error in interceptor:", error);
+        console.error("Error in interceptor:", error);
         return Promise.reject(error);
     }
 );
+
 
 export default api;
